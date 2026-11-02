@@ -1,51 +1,27 @@
-# Endpoint Deployment Notes
+# Windows 11 and Intune deployment notes
 
-Windows 11 and Intune deployment design, pilot checks, rollback, and validation templates.
+**Stage: planning.** This repository contains a proposed pilot and change-record template. It does not contain a deployed Intune configuration or a completed rollout.
 
-**Owner:** [Mahamat Nassour Ahmat](https://github.com/Mhtnsr) · IT Support Specialist → Systems Administrator
+## The question
 
-## Problem
+How would I pilot an endpoint change with clear prerequisites, a small scope, observable acceptance checks, and a recovery path?
 
-Deployments fail when prerequisites, pilots, and recovery are undocumented.
+## Documents
 
-## Solution
+- [Pilot plan](docs/pilot-plan.md): identity/enrollment prerequisites, configuration intent, application checks, update behavior, and recovery limits.
+- [Change record](templates/change-record.md): baseline, assignments, execution, verification, and recovery outcome.
+- [Evidence index](evidence/README.md): where sanitized results will go after execution.
 
-A Windows 11 and Intune lab design that connects enrollment prerequisites to pilot criteria, configuration intent, verification, recovery, and a change record.
+## Work still needed
 
-## Usage
+1. Confirm an authorized test tenant, suitable licensing, and an owned/disposable test device.
+2. Record the exact Windows build and chosen join/enrollment method.
+3. Review current Microsoft requirements before making assignments.
+4. Apply one harmless pilot change and record its actual outcome.
+5. Verify ordinary sign-in and user tasks, then test the documented recovery procedure.
 
-Run from the repository root. Use an isolated, authorized environment and inspect source before execution.
+Removing a policy assignment does not necessarily reverse its settings. Wipe, retire, and delete are different actions; none is a generic rollback. The pilot plan requires choosing a recovery method before execution.
 
-```text
-Start with docs/pilot-plan.md.
-Copy templates/change-record.md into a private lab working folder.
-Record actual enrollment and rollback results before marking any deployment complete.
-```
+There are no tenant exports, device identifiers, recovery keys, licensed images, or scripts applying policies here. The value at this stage is the written plan; execution evidence is pending.
 
-## Validation and limits
-
-Design documentation only. No tenant policies, enrollment, licensing, device compliance, deployment, or rollback are claimed as completed.
-
-## Screenshots and evidence
-
-[Evidence checklist](evidence/README.md). Placeholder: add a sanitized capture of the actual execution or lab result here after validation. No screenshots or outcomes are fabricated.
-
-<!-- Example after creating the file: ![Sanitized lab result](evidence/lab-result.png) -->
-
-## Repository map
-
-Source belongs in `scripts/`, reproducible checks in `tests/`, synthetic inputs in `examples/`, design notes in `docs/`, reusable records in `templates/`, and sanitized proof in `evidence/`. Only directories relevant to this project are created.
-
-## Next steps
-
-- Capture a reproducible lab run with expected versus observed behavior.
-- Document failure cases and recovery or escalation.
-- Update validation status only after recording actual results.
-
-## Security
-
-See [SECURITY.md](SECURITY.md). No company data, credentials, internal topology, or live ticket details belong here.
-
-## License
-
-[MIT](LICENSE). A personal learning project; not affiliated with or endorsed by USEReady, Microsoft, CompTIA, or other vendors.
+[MIT license](LICENSE) · [Security](SECURITY.md)
